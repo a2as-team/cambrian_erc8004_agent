@@ -1,0 +1,336 @@
+manifest:
+  version: "0.1.3"
+  schema: https://a2as.org/cert/schema
+  subject:
+    name: cambriannetwork/cambrian_erc8004_agent
+    source: https://github.com/cambriannetwork/cambrian_erc8004_agent
+    branch: main
+    commit: "a67973d1"
+    scope: [agent/agent/python_adk/google_adk_mcp.py, agent/python_adk/google_adk_mcp.py, agent/python_adk/server.py]
+  issued:
+    by: A2AS.org
+    at: '2026-02-11T16:47:11Z'
+    url: https://a2as.org/certified/agents/cambriannetwork/cambrian_erc8004_agent
+  signatures:
+    digest: sha256:Xw5P0EWDO6f7jESMm_PAAX2kT21Tysui8aI0sJ4s9qk
+    key: ed25519:ExoOzjgBTnYxH79ZJiToxWXC0lHKe_GTANN6457723c
+    sig: ed25519:3kFpkia5NAW6SkNJaPIQ0AbgqBtxvtpbMMXP3ZmMCA9036RxCHbBv1UOeDWLxWaea4l5OZ7biylwZ89pJkWnCg
+
+agents:
+  agent.1:
+    type: instance
+    models: [gemini-2.5-flash]
+    tools: [MCPToolset.1]
+    mcp: [MCPToolset.1]
+    params:
+      name: cambrian_assistant
+      description: Cambrian blockchain data assistant with auto-discovered MCP tools
+      instruction: [You are a Cambrian blockchain data assistant. ALWAYS use the available tools to answer questions., 'CURRENT
+          UNIX TIMESTAMP: {current_time}', '24 HOURS AGO: {time_24h_ago}', 'Available tools: {...} tools discovered', 'CRITICAL
+          TOOL NAMING - USE EXACT TOOL NAMES AS PROVIDED:', '- For token security metrics: You MUST use "solanatokenssecuirty"
+          (NOT "solanatokensecurity")', '- For holder distribution over time: Use "solanatokensholderdistributionovertime"',
+        '- These tool names have typos but you MUST use them exactly as shown', '- NEVER auto-correct or modify tool names
+          - the MCP server only recognizes the exact names', 'CRITICAL RULES FOR PARAMETER HANDLING:', 1. NEVER ask for missing
+          parameters - use intelligent defaults immediately, '2. When time parameters are missing, use these values:', '-
+          after_time: {time_24h_ago} (24 hours ago)', '- before_time: {current_time} (current time)', '- interval: "1H" (hourly)',
+        '3. When limits are missing, use: 10 or 20', '4. When days parameter is missing, use: 7', '5. For multi-address endpoints
+          without specific addresses, explain you need specific addresses', 'DEFAULT PARAMETER VALUES:', '- Time ranges: Last
+          24 hours (calculate unix timestamps)', '- Intervals: "1H" for OHLCV data', '- Limits: 10 for lists', '- Days: 7
+          for historical data', '- Chain ID: 8453 for Base (EVM)', '- Order: "liquidity" or "volume" for sorting', 'COMMON
+          ADDRESSES:', '- SOL: So11111111111111111111111111111111111111112', '- USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        '- USDT: Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', '- BONK: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', 'TOOL
+          USAGE EXAMPLES:', '- "Show OHLCV for SOL": Use solanaohlcvtoken with SOL address and last 24h', '- "Get pool transactions":
+          Use solanapooltransactions with pool address and days=1', '- "Show trending tokens": Use solanatrendingtokens with
+          order_by="volume"', '- "Get wallet balance history": Use solanawalletbalancehistory with last 24h', 'ALWAYS inform
+          user of default choices: "I''ll use the last 24 hours of data with hourly intervals."', ALWAYS call tools with defaults
+          rather than asking for parameters.]
+      class: GoogleADKMCPFinal
+      instance: agent.GoogleADKMCPFinal.agent
+  agent.2:
+    type: instance
+    models: [gemini-2.5-flash]
+    tools: [MCPToolset.2]
+    mcp: [MCPToolset.2]
+    params:
+      name: cambrian_assistant
+      description: Cambrian blockchain data assistant with schema-validated MCP tools
+      instruction: [You are a Cambrian blockchain data assistant. ALWAYS use the available tools to answer questions., 'CURRENT
+          UNIX TIMESTAMP: {current_time}', '24 HOURS AGO: {time_24h_ago}', 'Available tools: {...} tools discovered', 'CRITICAL
+          TOOL NAMING - USE EXACT TOOL NAMES AS PROVIDED:', '- For token security metrics: You MUST use "solanatokenssecuirty"
+          (NOT "solanatokensecurity")', '- For holder distribution over time: Use "solanatokensholderdistributionovertime"',
+        '- These tool names have typos but you MUST use them exactly as shown', '- NEVER auto-correct or modify tool names
+          - the MCP server only recognizes the exact names', 'CRITICAL RULES FOR PARAMETER HANDLING:', 1. NEVER ask for missing
+          parameters - use intelligent defaults immediately, '2. When time parameters are missing, use these values:', '-
+          after_time: {time_24h_ago} (24 hours ago)', '- before_time: {current_time} (current time)', '- interval: "1H" (hourly)',
+        '3. When limits are missing, use: 10 or 20', '4. When days parameter is missing, use: 7', '5. For multi-address endpoints
+          without specific addresses, explain you need specific addresses', 'DEFAULT PARAMETER VALUES:', '- Time ranges: Last
+          24 hours (calculate unix timestamps)', '- Intervals: "1H" for OHLCV data', '- Limits: 10 for lists', '- Days: 7
+          for historical data', '- Chain ID: 8453 for Base (EVM)', '- Order: "liquidity" or "volume" for sorting', 'COMMON
+          ADDRESSES:', '- SOL: So11111111111111111111111111111111111111112', '- USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        '- USDT: Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', '- BONK: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', 'TOOL
+          USAGE EXAMPLES:', '- "Show OHLCV for SOL": Use solanaohlcvtoken with SOL address and last 24h', '- "Get pool transactions":
+          Use solanapooltransactions with pool address and days=1', '- "Show trending tokens": Use solanatrendingtokens with
+          order_by="volume"', '- "Get wallet balance history": Use solanawalletbalancehistory with last 24h', 'ALWAYS inform
+          user of default choices: "I''ll use the last 24 hours of data with hourly intervals."', ALWAYS call tools with defaults
+          rather than asking for parameters.]
+      class: GoogleADKMCPFinal
+      instance: agent.GoogleADKMCPFinal.agent
+  agent.3:
+    type: instance
+    models: [gemini-2.5-flash]
+    tools: [MCPToolset.3]
+    mcp: [MCPToolset.3]
+    params:
+      name: cambrian_assistant
+      description: Cambrian blockchain data assistant with auto-discovered MCP tools
+      instruction: [You are a Cambrian blockchain data assistant. ALWAYS use the available tools to answer questions., 'CURRENT
+          UNIX TIMESTAMP: {current_time}', '24 HOURS AGO: {time_24h_ago}', 'Available tools: {...} tools discovered', 'CRITICAL
+          TOOL NAMING - USE EXACT TOOL NAMES AS PROVIDED:', '- For token security metrics: You MUST use "solanatokenssecuirty"
+          (NOT "solanatokensecurity")', '- For holder distribution over time: Use "solanatokensholderdistributionovertime"',
+        '- These tool names have typos but you MUST use them exactly as shown', '- NEVER auto-correct or modify tool names
+          - the MCP server only recognizes the exact names', 'CRITICAL RULES FOR PARAMETER HANDLING:', 1. NEVER ask for missing
+          parameters - use intelligent defaults immediately, '2. When time parameters are missing, use these values:', '-
+          after_time: {time_24h_ago} (24 hours ago)', '- before_time: {current_time} (current time)', '- interval: "1H" (hourly)',
+        '3. When limits are missing, use: 10 or 20', '4. When days parameter is missing, use: 7', '5. For multi-address endpoints
+          without specific addresses, explain you need specific addresses', 'DEFAULT PARAMETER VALUES:', '- Time ranges: Last
+          24 hours (calculate unix timestamps)', '- Intervals: "1H" for OHLCV data', '- Limits: 10 for lists', '- Days: 7
+          for historical data', '- Chain ID: 8453 for Base (EVM)', '- Order: "liquidity" or "volume" for sorting', 'COMMON
+          ADDRESSES:', '- SOL: So11111111111111111111111111111111111111112', '- USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        '- USDT: Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', '- BONK: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', 'TOOL
+          USAGE EXAMPLES:', '- "Show OHLCV for SOL": Use solanaohlcvtoken with SOL address and last 24h', '- "Get pool transactions":
+          Use solanapooltransactions with pool address and days=1', '- "Show trending tokens": Use solanatrendingtokens with
+          order_by="volume"', '- "Get wallet balance history": Use solanawalletbalancehistory with last 24h', 'ALWAYS inform
+          user of default choices: "I''ll use the last 24 hours of data with hourly intervals."', ALWAYS call tools with defaults
+          rather than asking for parameters.]
+      class: GoogleADKMCPFinal
+      instance: agent.GoogleADKMCPFinal.agent
+  agent.agent:
+    type: instance
+    models: [gemini-2.5-flash]
+    tools: [MCPToolset]
+    mcp: [MCPToolset.0]
+    params:
+      name: cambrian_assistant
+      description: Cambrian blockchain data assistant with auto-discovered MCP tools
+      instruction: [You are a Cambrian blockchain data assistant. ALWAYS use the available tools to answer questions., 'CURRENT
+          UNIX TIMESTAMP: {current_time}', '24 HOURS AGO: {time_24h_ago}', 'Available tools: {...} tools discovered', 'CRITICAL
+          TOOL NAMING - USE EXACT TOOL NAMES AS PROVIDED:', '- For token security metrics: You MUST use "solanatokenssecuirty"
+          (NOT "solanatokensecurity")', '- For holder distribution over time: Use "solanatokensholderdistributionovertime"',
+        '- These tool names have typos but you MUST use them exactly as shown', '- NEVER auto-correct or modify tool names
+          - the MCP server only recognizes the exact names', 'CRITICAL RULES FOR PARAMETER HANDLING:', 1. NEVER ask for missing
+          parameters - use intelligent defaults immediately, '2. When time parameters are missing, use these values:', '-
+          after_time: {time_24h_ago} (24 hours ago)', '- before_time: {current_time} (current time)', '- interval: "1H" (hourly)',
+        '3. When limits are missing, use: 10 or 20', '4. When days parameter is missing, use: 7', '5. For multi-address endpoints
+          without specific addresses, explain you need specific addresses', 'DEFAULT PARAMETER VALUES:', '- Time ranges: Last
+          24 hours (calculate unix timestamps)', '- Intervals: "1H" for OHLCV data', '- Limits: 10 for lists', '- Days: 7
+          for historical data', '- Chain ID: 8453 for Base (EVM)', '- Order: "liquidity" or "volume" for sorting', 'COMMON
+          ADDRESSES:', '- SOL: So11111111111111111111111111111111111111112', '- USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        '- USDT: Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', '- BONK: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263', 'TOOL
+          USAGE EXAMPLES:', '- "Show OHLCV for SOL": Use solanaohlcvtoken with SOL address and last 24h', '- "Get pool transactions":
+          Use solanapooltransactions with pool address and days=1', '- "Show trending tokens": Use solanatrendingtokens with
+          order_by="volume"', '- "Get wallet balance history": Use solanawalletbalancehistory with last 24h', 'ALWAYS inform
+          user of default choices: "I''ll use the last 24 hours of data with hourly intervals."', ALWAYS call tools with defaults
+          rather than asking for parameters.]
+      class: GoogleADKMCPFinal
+
+models:
+  gemini-2.5-flash:
+    type: literal
+    agents: [agent.agent, agent.1, agent.2, agent.3]
+
+tools:
+  MCPToolset:
+    type: mcp
+    agents: [agent.agent]
+    params:
+      class: MCPToolset
+      mcp_server: MCPToolset
+  MCPToolset.1:
+    type: mcp
+    agents: [agent.1]
+    params:
+      class: MCPToolset
+      mcp_server: MCPToolset.1
+  MCPToolset.2:
+    type: mcp
+    agents: [agent.2]
+    params:
+      class: MCPToolset
+      mcp_server: MCPToolset.2
+  MCPToolset.3:
+    type: mcp
+    agents: [agent.3]
+    params:
+      class: MCPToolset
+      mcp_server: MCPToolset.3
+
+mcp:
+  MCPToolset.0:
+    type: network
+    url: self.MCP_SERVER_URL
+    agents: [agent.GoogleADKMCPFinal.agent, agent.agent]
+    params:
+      class: MCPToolset
+      connection_type: StreamableHTTPServerParams
+      instance: MCPToolset
+  MCPToolset.1:
+    type: network
+    url: self.MCP_SERVER_URL
+    agents: [agent.GoogleADKMCPFinal.agent.1, agent.1]
+    params:
+      class: MCPToolset
+      connection_type: StreamableHTTPServerParams
+  MCPToolset.2:
+    type: network
+    url: self.MCP_SERVER_URL
+    agents: [agent.GoogleADKMCPFinal.agent.2, agent.2]
+    params:
+      class: MCPToolset
+      connection_type: StreamableHTTPServerParams
+      tool_filter: self._create_tool_filter()
+  MCPToolset.3:
+    type: network
+    url: self.MCP_SERVER_URL
+    agents: [agent.GoogleADKMCPFinal.agent.3, agent.3]
+    params:
+      class: MCPToolset
+      connection_type: StreamableHTTPServerParams
+      tool_filter: self._create_tool_filter()
+
+imports:
+  Agent: google.adk.agents.Agent
+  aiohttp: aiohttp
+  Any: typing.Any
+  AnyUrl: pydantic.AnyUrl
+  asyncio: asyncio
+  CORS: flask_cors.CORS
+  Dict: typing.Dict
+  Flask: flask.Flask
+  GoogleADKMCPFinal: google_adk_mcp.GoogleADKMCPFinal
+  hashlib: hashlib
+  InMemorySessionService: google.adk.sessions.InMemorySessionService
+  json: json
+  jsonify: flask.jsonify
+  logging: logging
+  MCPTool: google.adk.tools.mcp_tool.mcp_tool.MCPTool
+  MCPToolset: google.adk.tools.mcp_tool.mcp_toolset.MCPToolset
+  Optional: typing.Optional
+  os: os
+  request: flask.request
+  RunConfig: google.adk.runners.RunConfig
+  Runner: google.adk.runners.Runner
+  StreamableHTTPServerParams: google.adk.tools.mcp_tool.mcp_session_manager.StreamableHTTPServerParams
+  sys: sys
+  time: time
+  traceback: traceback
+  types: google.genai.types
+  uuid: uuid
+
+functions:
+  __init__:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self, gemini_api_key, cambrian_api_key]
+  _add_conversation_history:
+    type: async
+    module: agent.python_adk.google_adk_mcp
+    args: [self, session_id, conversation_history]
+  _create_tool_filter:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self]
+  _discover_tools:
+    type: async
+    module: agent.python_adk.google_adk_mcp
+    args: [self]
+  _fix_agent_tool_schemas:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self]
+    params:
+      returns: int
+  _fix_tool_schema:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self, schema]
+    params:
+      returns: Dict
+  adk_mcp_json_fix:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self, obj]
+  ask:
+    type: sync
+    module: agent.python_adk.server
+  capabilities:
+    type: sync
+    module: agent.python_adk.server
+  filter_invalid_schema_tools:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+  get_agent:
+    type: sync
+    module: agent.python_adk.server
+  get_capabilities:
+    type: sync
+    module: agent.python_adk.google_adk_mcp
+    args: [self]
+    params:
+      returns: Dict
+  health:
+    type: sync
+    module: agent.python_adk.server
+  initialize:
+    type: async
+    module: agent.python_adk.google_adk_mcp
+    args: [self]
+  initialize_with_session:
+    type: async
+    module: agent.python_adk.google_adk_mcp
+    args: [self, session_id]
+  normalize:
+    type: sync
+    module: agent.agent.python_adk.google_adk_mcp
+    args: [name]
+  process_question:
+    type: async
+    module: agent.python_adk.google_adk_mcp
+    args: [self, question, session_id, conversation_history]
+    params:
+      returns: Dict
+
+variables:
+  CAMBRIAN_API_KEY:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.agent.python_adk.google_adk_mcp, agent.python_adk.google_adk_mcp, agent.python_adk.server]
+  GEMINI_API_KEY:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.agent.python_adk.google_adk_mcp, agent.python_adk.google_adk_mcp, agent.python_adk.server]
+  GOOGLE_API_KEY:
+    type: env
+    params:
+      caller: [os.environ]
+  MCP_SERVER_URL:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.python_adk.google_adk_mcp]
+  PYTHON_ADK_HOST:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.python_adk.server]
+  PYTHON_ADK_PORT:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.python_adk.server]
+  SERVER_CAMBRIAN_API_KEY:
+    type: env
+    params:
+      caller: [os.getenv]
+      path: [agent.python_adk.google_adk_mcp, agent.python_adk.server]
